@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Receipes</title>
+    <style>
+        /* Optional: Add some basic styling for the button */
+        .delete-button {
+            background-color: #ff0000; /* Red color */
+            color: #ffffff; /* White text */
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+    </style>
+</head>
+<body>
+  <nav class="navbar dark p-3 bg-danger shadow-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="btn btn-success" href="/logout/">Logout</a>
+    </div>
+  </nav>
+    <div class="container">
+      <br>
+      <br>
+        <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
+            {%csrf_token%}
+            <h2>Add Receipe</h2>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Receipe Name</label>
+                <input name="receipe_name" type="text" required class="form-control" placeholder="Enter receipe name">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Receipe Description</label>
+             <textarea name="receipe_description" required class="form-control" placeholder="Enter details about receipe"></textarea>
+              </div>
+              <div class="form-group">
+                  <label for="exampleInputEmail1">Receipe Image</label>
+                  <input name="receipe_image" type="file" class="form-control" placeholder="choose file">
+                </div>
+              <button type="submit" class="btn btn-success">Add Receipe</button>
+          </form>
+    </div>
+    <br>
+    <br>
+    <hr>
+    <form >
+    <div class="container mt-5 ">
+      <div class="mx-auto col-6">
+        <label for="exampleInputEmail1">Search Receipe</label>
+        <input name="search" type="text" value = "{{receipe.receipe_name}}" class="form-control" placeholder="Enter receipe name">
+        <br>
+        <button type="submit" class="btn btn-primary">Search</button>
+<br>
+      </div>
+    </div>
+    <form>
+          <table class="table table-dark mt-5">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Receipe_Name</th>
+            <th scope="col">Receipe_Description</th>
+            <th scope="col">Receipe_Image</th>
+            <th scope="col">Button</th>
+          </tr>
+        </thead>
+        <tbody>
+         {%for receipe in receipes%}
+         <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{receipe.receipe_name}}</td>
+            <td>{{receipe.receipe_description}}</td>
+            <td><img src="/media/{{receipe.receipe_image}}" width="100px" height = "100px"></td>
+            <td>
+                <a href = "/update-receipes/{{receipe.id}}" class = "btn btn-success">Update
+                <a href = "/delete-receipes/{{receipe.id}}" class = "btn btn-danger">Delete 
+            </td>
+        </tr>
+         {%endfor%}
+        </tbody>
+      </table>
+      
+</body>
+</html>

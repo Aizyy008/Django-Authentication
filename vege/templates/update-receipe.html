@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Receipes</title>
+</head>
+<body>
+    <div class="container">
+        <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
+            {%csrf_token%}
+            <h2>Update Receipe</h2>
+            <div class="form-group">
+                <label for="exampleInputEmail1">New Receipe Name</label>
+                <input name="receipe_name" type="text" required value = "{{receipe.receipe_name}}" class="form-control" placeholder="Enter receipe name">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">New Receipe Description</label>
+             <textarea name="receipe_description" required class="form-control" placeholder="Enter details about receipe">{{receipe.receipe_description}}</textarea>
+              </div>
+              <div class="form-group">
+                  <label for="exampleInputEmail1">New Receipe Image</label>
+                  <input name="receipe_image" type="file" value = "{{receipe.receipe_image}}" class="form-control" placeholder="choose file">
+                </div>
+              <button type="submit" class="btn btn-success">Update Receipe</button>
+          </form>
+    </div>
+    
+</body>
+</html>
